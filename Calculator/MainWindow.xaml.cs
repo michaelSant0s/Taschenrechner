@@ -44,7 +44,9 @@ namespace Calculator
         private void OnEnterPressOrCalculateButtonClick()
         {
             var outputFormater = new OutputFormater();
-            OutputField.Text = outputFormater.GetOutput("test") + OutputField.Text;
+            Parser parser = new Parser();
+            var result = parser.ParseInput(InputField.Text);
+            // InputField.Text = "";
         }
     }
 }
