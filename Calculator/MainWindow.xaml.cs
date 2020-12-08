@@ -9,7 +9,7 @@ namespace Calculator
     {
         private Button CalculateButton;
         private TextBox InputField;
-        private TextBlock OutputField;
+        private TextBox OutputField;
         public MainWindow()
         {
             InitializeComponent();
@@ -20,12 +20,12 @@ namespace Calculator
             AvaloniaXamlLoader.Load(this);
             CalculateButton = this.FindControl<Button>("CalculateButton");
             InputField = this.FindControl<TextBox>("InputField");
-            OutputField = this.FindControl<TextBlock>("OutputField");
+            OutputField = this.FindControl<TextBox>("OutputField");
 
 
             CalculateButton.Click += (sender, args) =>
             {
-                OutputField.Text += "test\n_____\ntest" + InputField.Text;
+                // OutputField.Text += "test\n_____\ntest" + InputField.Text;
                 OnEnterPressOrCalculateButtonClick();
             };
 
@@ -43,7 +43,8 @@ namespace Calculator
 
         private void OnEnterPressOrCalculateButtonClick()
         {
-
+            var outputFormater = new OutputFormater();
+            OutputField.Text = outputFormater.GetOutput("test") + OutputField.Text;
         }
     }
 }

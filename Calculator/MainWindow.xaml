@@ -21,12 +21,15 @@
             <TextBox Margin="20" FontSize="30" Background="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
             Foreground="WhiteSmoke" Grid.Column="0" Name="InputField" />
             <Button Grid.Column="1" Name="CalculateButton" HorizontalAlignment="Stretch" 
-            VerticalAlignment="Stretch" Margin="30 30 50 30" Background="#191919" Content="Berechne (Enter)"/>
+            VerticalAlignment="Stretch" FontSize="30" Margin="30 30 50 30" Background="#191919" Foreground="WhiteSmoke"
+            Content="Berechne (Enter)"/>
         </Grid>
 
          <Grid Grid.Row="1" Margin="30">
-            <TextBlock Background="Black" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-            Foreground="WhiteSmoke" Name="OutputField" />
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                <TextBox Background="Black" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                Foreground="WhiteSmoke" Name="OutputField"  IsReadOnly="True"/>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>
