@@ -46,7 +46,7 @@ namespace Calculator
             OutputFormater outputFormater = new OutputFormater();
             Parser parser = new Parser();
             MathOperation result = parser.ParseInput(InputField.Text);
-            OutputField.Text = result.GetValue() + "";
+            OutputField.Text = result.Balance().GetValue() + "";
         }
     }
 }

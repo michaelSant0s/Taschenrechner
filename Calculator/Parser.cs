@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Calculator
 {
+    // TODO: 3 - -3
     public class Parser
     {
         public MathOperation ParseInput(string input)
@@ -15,7 +16,7 @@ namespace Calculator
         }
         private MathOperation Parse(MathOperation lastOperation, string input, ref int index)
         {
-            MathOperation operation = new MathOperation();
+            MathOperation operation = new MathOperation() { Sealed = true };
             int writtenTo = 0;
             while (index < input.Length)
             {
