@@ -1,0 +1,32 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Calculator.MainWindow"
+        Title="Calculator">
+    <Grid Background="#2d2c2d">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions> 
+
+            <TextBox Margin="20" FontSize="30" Background="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+            Foreground="WhiteSmoke" Grid.Column="0" Name="InputField" />
+            <Button Grid.Column="1" Name="CalculateButton" HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch" Margin="30 30 50 30" Background="#191919" Content="Berechne (Enter)"/>
+        </Grid>
+
+         <Grid Grid.Row="1" Margin="30">
+            <TextBlock Background="Black" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+            Foreground="WhiteSmoke" Name="OutputField" />
+        </Grid>
+    </Grid>
+</Window>
