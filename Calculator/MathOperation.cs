@@ -1,33 +1,5 @@
 using System;
 using System.Collections.Generic;
-
-// namespace Calculator
-// {
-//     public enum Operator
-//     {
-//         Addition,
-//         Subtraction,
-//         Multiplication,
-//         Division
-//     }
-
-//     public class MathOperation
-//     {
-//         public List<MathOperation> DependsOn { get; set; } = new List<MathOperation>();
-//         public string First { get; set; }
-//         public Operator Operator { get; set; }
-//         public string Second { get; set; }
-//     }
-
-
-//     public class DiesDas
-//     {
-//         public DiesDas erste { get; set; }
-//         public DiesDas zweite { get; set; }
-//         public string wert { get; set; }
-//     }
-// }
-
 namespace Calculator
 {
     public enum Operator
@@ -41,6 +13,7 @@ namespace Calculator
     public interface IMathValue
     {
         double GetValue();
+
     }
 
     public class TextValue : IMathValue
@@ -51,17 +24,12 @@ namespace Calculator
         {
             return double.Parse(Text);
         }
+
+        public override string ToString()
+        {
+            return Text;
+        }
     }
-
-    // public class DataValue : IMathValue
-    // {
-    //     public MathOperation MathOperation { get; set; }
-
-    //     public double GetValue()
-    //     {
-    //         return MathOperation.GetValue();
-    //     }
-    // }
 
     public class MathOperation : IMathValue
     {
@@ -91,6 +59,29 @@ namespace Calculator
                     return First.GetValue() / Second.GetValue();
             }
             return -1;
+        }
+
+        public override string ToString()
+        {
+            string result = First.ToString();
+
+            switch (Operator)
+            {
+                case Operator.Addition:
+                    result += "+";
+                    break;
+                case Operator.Subtraction:
+                    result += "-";
+                    break;
+                case Operator.Multiplication:
+                    result += "*";
+                    break;
+                case Operator.Division:
+                    result += "/";
+                    break;
+            }
+
+            return "(" + result + Second.ToString() + ")";
         }
     }
 }

@@ -43,10 +43,10 @@ namespace Calculator
 
         private void OnEnterPressOrCalculateButtonClick()
         {
-            var outputFormater = new OutputFormater();
+            OutputFormater outputFormater = new OutputFormater();
             Parser parser = new Parser();
-            var result = parser.ParseInput(InputField.Text);
-            // InputField.Text = "";
+            MathOperation result = parser.ParseInput(InputField.Text);
+            OutputField.Text = result.GetValue() + "";
         }
     }
 }
