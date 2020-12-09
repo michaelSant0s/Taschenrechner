@@ -2,17 +2,11 @@ using System;
 
 namespace Calculator
 {
-    public class OutputFormater
+    public static class OutputFormater
     {
-        public OutputFormater()
+        public static string GetOutput(string input, string result)
         {
-        }
-
-
-        public string GetOutput(string result)
-        {
-
-            return result += "\n------------------\n";
+            return input + "\n" + result + "\n------------------\n";
         }
     }
 }

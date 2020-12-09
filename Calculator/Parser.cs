@@ -4,18 +4,17 @@ using System.Text;
 
 namespace Calculator
 {
-    // TODO: 3 - -3
     public class Parser
     {
         public MathOperation ParseInput(string input)
         {
-
             input = input.Replace(" ", "");
             int index = 0;
             return Parse(null, input, ref index);
         }
         private MathOperation Parse(MathOperation lastOperation, string input, ref int index)
         {
+            bool negativeNumberIsPossible = false;
             MathOperation operation = new MathOperation() { Sealed = true };
             int writtenTo = 0;
             while (index < input.Length)
@@ -27,24 +26,26 @@ namespace Calculator
                     operation = new MathOperation(operation);
                 }
 
-                if (char.IsDigit(input[index]))
+                if (char.IsDigit(input[index]) || (negativeNumberIsPossible || index == 0 || input[index - 1] == '(') && input[index] == '-')
                 {
                     TextValue number = new TextValue();
                     do
                     {
                         number.Text += input[index++];
                     }
-                    while (index < input.Length && (char.IsDigit(input[index]) || input[index] == '.' || input[index] == ','));
+                    while (index < input.Length && (char.IsDigit(input[index]) || input[index] == '.' || input[index] == ',' ||
+                    (negativeNumberIsPossible || index == 0 || input[index - 1] == '(') && input[index] == '-'));
 
                     if (writtenTo == 1)
                     {
                         operation.Second = number;
+
                     }
                     else
                     {
                         operation.First = number;
                     }
-
+                    negativeNumberIsPossible = false;
                     writtenTo++;
                     continue;
                 }
@@ -54,15 +55,19 @@ namespace Calculator
                     {
                         case '+':
                             operation.Operator = Operator.Addition;
+                            negativeNumberIsPossible = true;
                             break;
                         case '-':
                             operation.Operator = Operator.Subtraction;
+                            negativeNumberIsPossible = true;
                             break;
                         case '/':
                             operation.Operator = Operator.Division;
+                            negativeNumberIsPossible = true;
                             break;
                         case '*':
                             operation.Operator = Operator.Multiplication;
+                            negativeNumberIsPossible = true;
                             break;
                         case '(':
                             if (writtenTo == 0)

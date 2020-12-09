@@ -72,7 +72,7 @@ namespace Calculator
             switch (Operator)
             {
                 case Operator.Addition:
-                    return First.GetValue() + Second.GetValue();
+                    return First.GetValue() + Second?.GetValue() ?? 0;
                 case Operator.Subtraction:
                     return First.GetValue() - Second.GetValue();
                 case Operator.Multiplication:
@@ -80,10 +80,9 @@ namespace Calculator
                 case Operator.Division:
                     return First.GetValue() / Second.GetValue();
             }
-            return -1;
+            return 0;
         }
 
-        // Only needed for debugging 
         public override string ToString()
         {
             string result = First.ToString();
@@ -104,7 +103,7 @@ namespace Calculator
                     break;
             }
 
-            return "(" + result + Second.ToString() + ")";
+            return "(" + result + Second?.ToString() + ")";
         }
 
 

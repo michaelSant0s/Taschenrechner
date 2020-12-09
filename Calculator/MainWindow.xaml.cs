@@ -22,10 +22,8 @@ namespace Calculator
             InputField = this.FindControl<TextBox>("InputField");
             OutputField = this.FindControl<TextBox>("OutputField");
 
-
             CalculateButton.Click += (sender, args) =>
             {
-                // OutputField.Text += "test\n_____\ntest" + InputField.Text;
                 OnEnterPressOrCalculateButtonClick();
             };
 
@@ -43,10 +41,11 @@ namespace Calculator
 
         private void OnEnterPressOrCalculateButtonClick()
         {
-            OutputFormater outputFormater = new OutputFormater();
             Parser parser = new Parser();
-            MathOperation result = parser.ParseInput(InputField.Text);
-            OutputField.Text = result.Balance().GetValue() + "";
+            MathOperation tree = parser.ParseInput(InputField.Text);
+
+            double result = tree.Balance().GetValue();
+            OutputField.Text = OutputFormater.GetOutput(InputField.Text, (decimal)result + "") + OutputField.Text;
         }
     }
 }

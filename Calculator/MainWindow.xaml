@@ -8,8 +8,8 @@
     <Grid Background="#2d2d2d">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="7*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="20">
@@ -18,15 +18,17 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions> 
 
-            <TextBox Margin="20" FontSize="30" Background="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-            Foreground="WhiteSmoke" Grid.Column="0" Name="InputField" />
+            <TextBlock Text="Eingabe" FontSize="15" Grid.Column="0" Foreground="WhiteSmoke" Margin="0 0 5 0"/>
+            <TextBox Margin="0 20 10 0" FontSize="30" Background="Black" VerticalAlignment="Stretch" 
+            HorizontalAlignment="Stretch" Foreground="WhiteSmoke" Grid.Column="0" Name="InputField" CaretBrush="White"/>
             <Button Grid.Column="1" Name="CalculateButton" HorizontalAlignment="Stretch" 
-            VerticalAlignment="Stretch" FontSize="30" Margin="30 30 50 30" Background="#191919" Foreground="WhiteSmoke"
-            Content="Berechne (Enter)"/>
+            VerticalAlignment="Stretch" FontSize="30" Margin="10 20 0 0"  Background="#191919" Foreground="WhiteSmoke"
+            Content="Berechnen (Enter)"/>
         </Grid>
 
-         <Grid Grid.Row="1" Margin="30">
-            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+        <Grid Grid.Row="1" Margin="20">
+            <TextBlock Text="Ausgabe" FontSize="15"  Foreground="WhiteSmoke" Margin="0 0 5 0"/>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0 20 0 0">
                 <TextBox Background="Black" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                 Foreground="WhiteSmoke" Name="OutputField"  IsReadOnly="True"/>
             </ScrollViewer>
