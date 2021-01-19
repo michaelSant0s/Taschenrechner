@@ -37,6 +37,11 @@ namespace Calculator
                     while (index < input.Length && (char.IsDigit(input[index]) || input[index] == '.' || input[index] == ',' || (
                     (negativeNumberIsPossible || index == 0 || input[index - 1] == '(') && input[index] == '-')));
 
+                    if (number?.Text.Length > 15)
+                    {
+                        throw new ArgumentOutOfRangeException();
+                    }
+
                     if (writtenTo == 1)
                     {
                         operation.Second = number;

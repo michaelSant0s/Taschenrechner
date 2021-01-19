@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+
 namespace Calculator
 {
     public enum Operator
@@ -13,7 +14,6 @@ namespace Calculator
     public interface IMathValue
     {
         double GetValue();
-
     }
 
     public class TextValue : IMathValue
@@ -22,7 +22,7 @@ namespace Calculator
 
         public double GetValue()
         {
-            return double.Parse(Text);
+            return double.Parse(Text.Replace('.', ','));
         }
 
         public override string ToString()
@@ -37,7 +37,9 @@ namespace Calculator
         public IMathValue First { get; set; }
         public Operator Operator { get; set; }
         public IMathValue Second { get; set; }
-        public MathOperation() { }
+        public MathOperation()
+        {
+        }
 
         public MathOperation(MathOperation mathOperation)
         {
@@ -50,17 +52,17 @@ namespace Calculator
         ║   ╠═─ +
         ║   ║   ╠═─1
         ║   ║   ╚═─1
-        ║   ║  
+        ║   ║
         ║   ╚═─ +
         ║       ╠═─1
         ║       ╚═─1
-        ║      
-        ║  
+        ║
+        ║
         ╚═─ *
             ╠═─ +
             ║   ╠═─1
             ║   ╚═─1
-            ║  
+            ║
             ╚═─ +
                 ╠═─1
                 ╚═─1
@@ -73,10 +75,13 @@ namespace Calculator
             {
                 case Operator.Addition:
                     return First.GetValue() + Second?.GetValue() ?? 0;
+
                 case Operator.Subtraction:
                     return First.GetValue() - Second.GetValue();
+
                 case Operator.Multiplication:
                     return First.GetValue() * Second.GetValue();
+
                 case Operator.Division:
                     return First.GetValue() / Second.GetValue();
             }
@@ -92,12 +97,15 @@ namespace Calculator
                 case Operator.Addition:
                     result += "+";
                     break;
+
                 case Operator.Subtraction:
                     result += "-";
                     break;
+
                 case Operator.Multiplication:
                     result += "*";
                     break;
+
                 case Operator.Division:
                     result += "/";
                     break;
@@ -106,9 +114,7 @@ namespace Calculator
             return "(" + result + Second?.ToString() + ")";
         }
 
-
-
-        /* 
+        /*
         1 + 2 * 3 - 4 / 5
 
         ╠═─ -
@@ -116,14 +122,14 @@ namespace Calculator
         |   |   ╠═─ +
         |   |   |   ╠═─1
         |   |   |   ╚═─2
-        |   |   |  
+        |   |   |
         |   |   ╚═─3
-        |   |  
+        |   |
         |   ╚═─4
-        |  
+        |
         ╚═─5
-        
-        If at the current node is * or / and the next is + or - then they need to be "changed". 
+
+        If at the current node is * or / and the next is + or - then they need to be "changed".
         For example the order of "3"-4 needs to be changed with 4/5, which is not possible because they are on differnt levels.
         The solution for this problem is to change the value of 4 with the result of 4/5 and then seal it, so if there is another
         operation, it can not get prioritized wrong by mistake.
