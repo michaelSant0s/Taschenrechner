@@ -32,14 +32,14 @@ namespace Calculator
                     do
                     {
                         number.Text += input[index++];
+                        negativeNumberIsPossible = false;
                     }
-                    while (index < input.Length && (char.IsDigit(input[index]) || input[index] == '.' || input[index] == ',' ||
-                    (negativeNumberIsPossible || index == 0 || input[index - 1] == '(') && input[index] == '-'));
+                    while (index < input.Length && (char.IsDigit(input[index]) || input[index] == '.' || input[index] == ',' || (
+                    (negativeNumberIsPossible || index == 0 || input[index - 1] == '(') && input[index] == '-')));
 
                     if (writtenTo == 1)
                     {
                         operation.Second = number;
-
                     }
                     else
                     {
@@ -57,18 +57,22 @@ namespace Calculator
                             operation.Operator = Operator.Addition;
                             negativeNumberIsPossible = true;
                             break;
+
                         case '-':
                             operation.Operator = Operator.Subtraction;
                             negativeNumberIsPossible = true;
                             break;
+
                         case '/':
                             operation.Operator = Operator.Division;
                             negativeNumberIsPossible = true;
                             break;
+
                         case '*':
                             operation.Operator = Operator.Multiplication;
                             negativeNumberIsPossible = true;
                             break;
+
                         case '(':
                             if (writtenTo == 0)
                             {
@@ -80,6 +84,7 @@ namespace Calculator
                             }
                             writtenTo++;
                             break;
+
                         case ')':
                             return lastOperation;
                     }

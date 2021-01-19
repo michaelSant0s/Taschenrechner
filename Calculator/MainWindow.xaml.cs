@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
+using System;
 
 namespace Calculator
 {
@@ -26,7 +27,6 @@ namespace Calculator
             {
                 OnEnterPressOrCalculateButtonClick();
             };
-
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -41,11 +41,18 @@ namespace Calculator
 
         private void OnEnterPressOrCalculateButtonClick()
         {
-            Parser parser = new Parser();
-            MathOperation tree = parser.ParseInput(InputField.Text);
+            try
+            {
+                Parser parser = new Parser();
+                MathOperation tree = parser.ParseInput(InputField.Text);
 
-            double result = tree.Balance().GetValue();
-            OutputField.Text = OutputFormater.GetOutput(InputField.Text, (decimal)result + "") + OutputField.Text;
+                double result = tree.Balance().GetValue();
+                OutputField.Text = OutputFormater.GetOutput(InputField.Text, (decimal)result + "") + OutputField.Text;
+            }
+            catch (Exception e)
+            {
+                OutputField.Text = e + OutputField.Text;
+            }
         }
     }
 }
